@@ -97,9 +97,9 @@ class BannerView: UIView,UIScrollViewDelegate {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "bannerOriginalDataArray" {
             if self.bannerOriginalDataArray != nil {
+                self.bannerDataArray?.removeAll()
                 if self.bannerOriginalDataArray!.count < 5 {
                     //低于5张图片时处理数据
-                    self.bannerDataArray?.removeAll()
                     guard self.bannerOriginalDataArray!.count != 0 else {
                         //0个时表示无数据
                         return
@@ -108,7 +108,6 @@ class BannerView: UIView,UIScrollViewDelegate {
                         self.bannerDataArray?.append(self.bannerOriginalDataArray![i%self.bannerOriginalDataArray!.count])
                     }
                 } else {
-                    self.bannerDataArray?.removeAll()
                     self.bannerDataArray?.append(contentsOf: self.bannerOriginalDataArray!)
                 }
             }
